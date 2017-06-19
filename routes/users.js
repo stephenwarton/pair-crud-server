@@ -23,15 +23,23 @@ router.get('/:id/beers', function(request, response, next) {
     });
 });
 
-router.post('/:id/beers', function(req, res, next){
-    queries.create({
-      name: req.body.name,
-      type: req.body.type,
-      abv: req.body.abv,
-      url: req.body.url,
-      user_id: req.body.user_id
-    }).then(function(result){
-      res.json(result);
+router.post('/:id/beers', function(req, res, next) {
+  queries.create({
+    name: req.body.name,
+    type: req.body.type,
+    abv: req.body.abv,
+    url: req.body.url,
+    user_id: req.body.user_id
+  }).then(function(result) {
+    res.json(result);
+  });
+});
+
+router.delete('/:id/beers', function(req, res, next) {
+  queries.delete(req.params.id).then(function() {
+    res.json({
+      deleted: true
     });
+  });
 });
 module.exports = router;
